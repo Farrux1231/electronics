@@ -18,7 +18,7 @@ model User {
   email      String    
   password   String
   name       String
-  role       String
+  role       String  @default("user")
   createdAt  DateTime  @default(now())
   lastOnline DateTime?
   image      String?
@@ -33,7 +33,7 @@ model User {
 }
 
 model Region {
-  id         BigInt    @id @default(autoincrement()) 
+  id         BigInt     @default(autoincrement()) @id
   name       String
   users     User[]
 }
@@ -65,12 +65,12 @@ model Product {
   desc            String
   available       BigInt
   discount        Int
-  checked         Boolean
+  checked         Boolean @default(false)
   comment         Coment[]
   star            Float?
-  views           Int
+  views           Int?
   location        String?
-  likes           Int
+  likes           Int?
   like            User_like[]
   category        Category @relation(fields: [categoryId], references: [id])
   user            User     @relation(fields: [userId], references: [id])
