@@ -1,21 +1,21 @@
 -- CreateTable
 CREATE TABLE "User" (
-    "id" BIGSERIAL NOT NULL,
+    "id" SERIAL NOT NULL,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "name" TEXT NOT NULL,
-    "role" TEXT NOT NULL,
+    "role" TEXT NOT NULL DEFAULT 'user',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "lastOnline" TIMESTAMP(3),
     "image" TEXT,
-    "regionId" BIGINT NOT NULL,
+    "regionId" INTEGER NOT NULL,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Region" (
-    "id" BIGSERIAL NOT NULL,
+    "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
 
     CONSTRAINT "Region_pkey" PRIMARY KEY ("id")
@@ -23,10 +23,10 @@ CREATE TABLE "Region" (
 
 -- CreateTable
 CREATE TABLE "Chat" (
-    "id" BIGSERIAL NOT NULL,
-    "fromId" BIGINT NOT NULL,
-    "toId" BIGINT NOT NULL,
-    "productId" BIGINT NOT NULL,
+    "id" SERIAL NOT NULL,
+    "fromId" INTEGER NOT NULL,
+    "toId" INTEGER NOT NULL,
+    "productId" INTEGER NOT NULL,
     "text" TEXT NOT NULL,
     "time" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
@@ -35,40 +35,40 @@ CREATE TABLE "Chat" (
 
 -- CreateTable
 CREATE TABLE "Product" (
-    "id" BIGSERIAL NOT NULL,
+    "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
-    "categoryId" BIGINT NOT NULL,
+    "categoryId" INTEGER NOT NULL,
     "image" TEXT,
     "price" DOUBLE PRECISION NOT NULL,
-    "userId" BIGINT NOT NULL,
+    "userId" INTEGER NOT NULL,
     "new_old" BOOLEAN NOT NULL,
     "deal_with_price" BOOLEAN NOT NULL,
     "type" TEXT NOT NULL,
     "old_price" DOUBLE PRECISION,
     "desc" TEXT NOT NULL,
-    "available" BIGINT NOT NULL,
+    "available" INTEGER NOT NULL,
     "discount" INTEGER NOT NULL,
-    "checked" BOOLEAN NOT NULL,
+    "checked" BOOLEAN NOT NULL DEFAULT false,
     "star" DOUBLE PRECISION,
-    "views" INTEGER NOT NULL,
+    "views" INTEGER,
     "location" TEXT,
-    "likes" INTEGER NOT NULL,
+    "likes" INTEGER,
 
     CONSTRAINT "Product_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Color" (
-    "id" BIGSERIAL NOT NULL,
+    "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
-    "productId" BIGINT NOT NULL,
+    "productId" INTEGER NOT NULL,
 
     CONSTRAINT "Color_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Category" (
-    "id" BIGSERIAL NOT NULL,
+    "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
 
     CONSTRAINT "Category_pkey" PRIMARY KEY ("id")
@@ -76,9 +76,9 @@ CREATE TABLE "Category" (
 
 -- CreateTable
 CREATE TABLE "Coment" (
-    "id" BIGSERIAL NOT NULL,
-    "userId" BIGINT NOT NULL,
-    "productId" BIGINT NOT NULL,
+    "id" SERIAL NOT NULL,
+    "userId" INTEGER NOT NULL,
+    "productId" INTEGER NOT NULL,
     "text" TEXT NOT NULL,
     "star" DOUBLE PRECISION NOT NULL,
 
@@ -87,18 +87,18 @@ CREATE TABLE "Coment" (
 
 -- CreateTable
 CREATE TABLE "User_like" (
-    "id" BIGSERIAL NOT NULL,
-    "userId" BIGINT NOT NULL,
-    "productId" BIGINT NOT NULL,
+    "id" SERIAL NOT NULL,
+    "userId" INTEGER NOT NULL,
+    "productId" INTEGER NOT NULL,
 
     CONSTRAINT "User_like_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Order" (
-    "id" BIGSERIAL NOT NULL,
-    "productId" BIGINT NOT NULL,
-    "userId" BIGINT NOT NULL,
+    "id" SERIAL NOT NULL,
+    "productId" INTEGER NOT NULL,
+    "userId" INTEGER NOT NULL,
     "prod_count" INTEGER NOT NULL,
     "ordered_time" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
@@ -107,7 +107,7 @@ CREATE TABLE "Order" (
 
 -- CreateTable
 CREATE TABLE "WebInfo" (
-    "id" BIGSERIAL NOT NULL,
+    "id" SERIAL NOT NULL,
     "phone" TEXT NOT NULL,
     "desc" TEXT NOT NULL,
     "email" TEXT NOT NULL,
@@ -120,8 +120,8 @@ CREATE TABLE "WebInfo" (
 
 -- CreateTable
 CREATE TABLE "_ColorToProduct" (
-    "A" BIGINT NOT NULL,
-    "B" BIGINT NOT NULL,
+    "A" INTEGER NOT NULL,
+    "B" INTEGER NOT NULL,
 
     CONSTRAINT "_ColorToProduct_AB_pkey" PRIMARY KEY ("A","B")
 );

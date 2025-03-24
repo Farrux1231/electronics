@@ -1,4 +1,0 @@
--- AlterTable
-ALTER TABLE "Product" ALTER COLUMN "checked" SET DEFAULT false,
-ALTER COLUMN "views" DROP NOT NULL,
-ALTER COLUMN "likes" DROP NOT NULL;

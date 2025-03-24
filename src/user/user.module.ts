@@ -9,7 +9,7 @@ import { MailService } from 'src/mail/mail.service';
     JwtModule.register({
       global: true,
       secret: "secret",
-      signOptions: { expiresIn: '30m' },
+      signOptions: { expiresIn: '1h' },
     }),
   ],
   controllers: [UserController],

@@ -14,16 +14,17 @@ datasource db {
 }
 
 model User {
-  id         BigInt    @id @default(autoincrement()) 
-  email      String    
+  id   Int @id @default(autoincrement())
+  email      String  @unique  
   password   String
   name       String
   role       String  @default("user")
   createdAt  DateTime  @default(now())
   lastOnline DateTime?
   image      String?
+  isActive   Boolean @default(false)
   region     Region   @relation(fields: [regionId], references: [id])
-  regionId   BigInt 
+  regionId   Int 
   orders     Order[]
   sentMessages    Chat[] @relation("Sender")
   receivedMessages Chat[] @relation("Receiver")
@@ -33,16 +34,16 @@ model User {
 }
 
 model Region {
-  id         BigInt     @default(autoincrement()) @id
+  id   Int @id @default(autoincrement())
   name       String
   users     User[]
 }
 
 model Chat {
-  id        BigInt   @id @default(autoincrement())
-  fromId    BigInt   
-  toId      BigInt   
-  productId BigInt  
+  id   Int @id @default(autoincrement())
+  fromId    Int   
+  toId      Int   
+  productId Int  
   text      String   
   time      DateTime @default(now())
 
@@ -51,19 +52,19 @@ model Chat {
 }
 
 model Product {
-  id              BigInt  @id @default(autoincrement())
+  id   Int @id @default(autoincrement())
   name            String
-  categoryId      BigInt
+  categoryId      Int
   image           String?
   price           Float
-  userId          BigInt
+  userId          Int
   colorId         Color[]
   new_old         Boolean
   deal_with_price Boolean
   type            String
   old_price       Float?
   desc            String
-  available       BigInt
+  available       Int
   discount        Int
   checked         Boolean @default(false)
   comment         Coment[]
@@ -77,22 +78,22 @@ model Product {
 }
 
 model Color {
-  id         BigInt    @id @default(autoincrement()) 
+  id   Int @id @default(autoincrement())
   name       String
-  productId  BigInt     
+  productId  Int     
   product    Product[]
 }
 
 model Category {
-  id         BigInt    @id @default(autoincrement()) 
+  id   Int @id @default(autoincrement())
   name       String
   products        Product[]
 }
 
 model Coment {
-  id         BigInt   @id @default(autoincrement())
-  userId     BigInt
-  productId  BigInt
+  id   Int @id @default(autoincrement())
+  userId     Int
+  productId  Int
   text       String
   star       Float
 
@@ -101,17 +102,17 @@ model Coment {
 }
 
 model User_like {
-  id         BigInt   @id @default(autoincrement())
-  userId     BigInt
-  productId  BigInt 
+  id   Int @id @default(autoincrement())
+  userId     Int
+  productId  Int 
   user       User     @relation("UserLikes", fields: [userId], references: [id])
   product    Product  @relation(fields: [productId], references: [id])
 }
 
 model Order {
-  id           BigInt   @id @default(autoincrement())
-  productId    BigInt   
-  userId       BigInt   
+  id   Int @id @default(autoincrement())
+  productId    Int   
+  userId       Int   
   prod_count   Int      
   ordered_time DateTime @default(now()) 
 
@@ -119,7 +120,7 @@ model Order {
 }
 
 model WebInfo {
-  id             BigInt   @id @default(autoincrement())
+  id   Int @id @default(autoincrement())
   phone          String   
   desc           String  
   email          String   
