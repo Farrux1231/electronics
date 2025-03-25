@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { LoginUserDto } from './dto/login-user.dto';
@@ -14,7 +14,7 @@ export class UserController {
     return this.userService.register(data);
   }
 
-  @Post("verify")
+  @Post("verify") 
   verify(@Body()data:verifyUserDto){
     return this.userService.verifyOtp(data)
   }

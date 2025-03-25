@@ -13,12 +13,13 @@ import { OrderModule } from './order/order.module';
 import { WebInfoModule } from './web-info/web-info.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { MailModule } from './mail/mail.module';
+import { NotificationGateway } from './notification/notification.gateway';
 
 @Module({
   imports: [RegionModule, ColorModule, UserModule, ChatModule, 
   ProductModule, CategoryModule, ComentModule, UserLikeModule, 
   OrderModule, WebInfoModule, PrismaModule, MailModule],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, NotificationGateway],
 })
 export class AppModule {}
